@@ -1,1 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fame Now</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+            background-color: black;
+            color: white;
+        }
+
+        /* Initial Blur Effect */
+        #landing {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            background: url('your-background-image.jpg') no-repeat center center/cover;
+            filter: blur(10px);
+            transition: filter 1s ease;
+        }
+
+        /* Text Overlay */
+        #click-to-view {
+            position: absolute;
+            font-size: 36px;
+            color: white;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        /* Main Content */
+        #main-content {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            text-align: center;
+        }
+
+        /* About Section */
+        #about {
+            font-size: 24px;
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: rgba(255, 0, 255, 0.2);
+            border-radius: 10px;
+        }
+
+        /* Join Discord Button */
+        #join-discord {
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: #9D00FF;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #join-discord:hover {
+            background-color: #bb33ff;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Initial Landing Section -->
+<div id="landing">
+    <div id="click-to-view">Click to view</div>
+</div>
+
+<!-- Main Content -->
+<div id="main-content">
+    <div id="about">
+        <p>We are the biggest server that provides services for free and paid. We offer services for Discord members, social media followers such as TikTok, Twitter, Instagram, and more!</p>
+    </div>
+    <button id="join-discord" onclick="redirectToDiscord()">Join Discord</button>
+</div>
+
+<!-- Background Music -->
+<audio id="background-music" loop>
+    <source src=" Aitch x AJ Tracey - Rain Feat. Tay Keith (Official Video).mp3 " type="audio/mpeg">
+</audio>
+
+<script>
+    // Landing Section
+    const landing = document.getElementById('landing');
+    const clickToView = document.getElementById('click-to-view');
+    const mainContent = document.getElementById('main-content');
+    const backgroundMusic = document.getElementById('background-music');
+
+    // Function to redirect to Discord
+    function redirectToDiscord() {
+        window.location.href = "https://discord.gg/famenow";
+    }
+
+    // Fade out landing screen on click
+    clickToView.addEventListener('click', () => {
+        landing.style.filter = 'blur(0px)';
+        clickToView.style.opacity = '0';
+        setTimeout(() => {
+            landing.style.display = 'none';
+            mainContent.style.display = 'flex';
+            backgroundMusic.play();
+        }, 1000); // 1-second fade
+    });
+</script>
+
+</body>
+</html>
 
