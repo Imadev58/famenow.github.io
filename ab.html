@@ -48,5 +48,19 @@
         <p>&copy; 2024 Fame Now. All rights reserved.</p>
     </footer>
 
+    <!-- Audio Player -->
+    <audio id="background-music" loop>
+        <source src="easy.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        // Play audio after user interaction to comply with browser autoplay policies
+        document.addEventListener('click', () => {
+            const backgroundMusic = document.getElementById('background-music');
+            backgroundMusic.play();
+        });
+    </script>
+
 </body>
 </html>
