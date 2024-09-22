@@ -1,159 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fame Now</title>
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            overflow: hidden;
-            font-family: 'Arial', sans-serif;
-            background-color: black;
-            color: white;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fame Now</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Arial', sans-serif;
+      background-color: #000;
+      color: #fff;
+      overflow: hidden;
+    }
 
-        /* Landing Blur Effect */
-        #landing {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-            background: black;
-            transition: filter 1s ease, opacity 1s ease;
-        }
+    /* Main overlay */
+    #overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://images.unsplash.com/photo-1542281286-9e0a16bb7366?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
+      filter: blur(10px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: all 1s ease;
+      z-index: 10;
+    }
 
-        /* Click to View Text */
-        #click-to-view {
-            position: absolute;
-            font-size: 40px;
-            font-weight: bold;
-            color: white;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 20px 40px;
-            border: 2px solid #9D00FF;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: transform 0.5s ease, background 0.5s ease;
-        }
+    #click-to-view {
+      text-align: center;
+    }
 
-        /* Hover animation for Click to View */
-        #click-to-view:hover {
-            transform: scale(1.05);
-            background: rgba(157, 0, 255, 0.8);
-        }
+    #click-to-view h1 {
+      font-size: 3rem;
+      color: #fff;
+      text-transform: uppercase;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      border-radius: 10px;
+      animation: neon-glow 2s infinite alternate;
+    }
 
-        /* Main Content - Hidden Initially */
-        #main-content {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            text-align: center;
-        }
+    @keyframes neon-glow {
+      from { text-shadow: 0 0 10px #9400D3, 0 0 20px #9400D3, 0 0 30px #9400D3; }
+      to { text-shadow: 0 0 20px #ff00ff, 0 0 30px #ff00ff, 0 0 40px #ff00ff; }
+    }
 
-        /* Hover Background Image */
-        #landing-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('0_big.jpg') no-repeat center center/cover;
-            opacity: 0;
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
+    /* Hidden main content */
+    #main-content.hidden {
+      display: none;
+    }
 
-        /* Follow Mouse Animation */
-        #landing:hover #landing-image {
-            opacity: 0.7;
-        }
+    #main-content {
+      text-align: center;
+      padding: 50px;
+    }
 
-        #landing:hover #landing-image:hover {
-            transform: scale(1.05);
-        }
+    .title {
+      font-size: 4rem;
+      color: #9400D3;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      animation: fade-in 2s ease forwards;
+    }
 
-        /* About Section */
-        #about {
-            font-size: 24px;
-            margin-bottom: 20px;
-            padding: 10px;
-            background-color: rgba(255, 0, 255, 0.2);
-            border-radius: 10px;
-        }
+    @keyframes fade-in {
+      from { opacity: 0; transform: translateY(-50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-        /* Join Discord Button */
-        #join-discord {
-            padding: 15px 30px;
-            font-size: 18px;
-            background-color: #9D00FF;
-            color: white;
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
+    /* Neon Button */
+    .neon-btn {
+      background-color: #000;
+      border: 2px solid #9400D3;
+      color: #fff;
+      font-size: 1.5rem;
+      padding: 15px 30px;
+      cursor: pointer;
+      text-transform: uppercase;
+      margin-top: 30px;
+      transition: 0.3s ease;
+      border-radius: 10px;
+    }
 
-        #join-discord:hover {
-            background-color: #bb33ff;
-        }
-    </style>
+    .neon-btn:hover {
+      background-color: #9400D3;
+      box-shadow: 0 0 20px #ff00ff, 0 0 30px #ff00ff;
+    }
+
+    /* Section Containers */
+    .section {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      border: 2px solid #9400D3;
+      box-shadow: 0 0 20px #ff00ff;
+      transition: 0.5s ease-in-out;
+    }
+
+    .section:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px #ff00ff;
+    }
+
+    .section h2 {
+      color: #9400D3;
+      font-size: 2rem;
+    }
+
+    .section p {
+      font-size: 1.2rem;
+      color: #fff;
+    }
+
+    /* Hide overflow */
+    body.hidden {
+      overflow: hidden;
+    }
+
+  </style>
 </head>
 <body>
 
-<!-- Landing Section -->
-<div id="landing">
-    <div id="landing-image"></div>
-    <div id="click-to-view">Click to view</div>
-</div>
-
-<!-- Main Content -->
-<div id="main-content">
-    <div id="about">
-        <p>We are the biggest server that provides free and paid services for Discord members and social media followers such as TikTok, Twitter, Instagram, and more!</p>
+  <!-- Overlay -->
+  <div id="overlay">
+    <div id="click-to-view">
+      <h1>Click to View</h1>
     </div>
-    <button id="join-discord" onclick="redirectToDiscord()">Join Discord</button>
-</div>
+  </div>
 
-<!-- Background Music -->
-<audio id="background-music" loop>
-    <source src="Aitch x AJ Tracey - Rain Feat. Tay Keith (Official Video).mp3" type="audio/mpeg">
-</audio>
+  <!-- Main Content -->
+  <div id="main-content" class="hidden">
+    <div class="content">
+      <h1 class="title">Fame Now</h1>
+      
+      <!-- Section 1: Social Media Followers -->
+      <div class="section">
+        <h2>What We Offer for Social Media</h2>
+        <p>We offer <strong>Twitter followers</strong>, <strong>Instagram followers</strong>, <strong>TikTok followers</strong>, <strong>YouTube subscribers</strong>, and so much more! Grow your social media presence with both paid and free options.</p>
+      </div>
 
-<script>
-    const landing = document.getElementById('landing');
-    const clickToView = document.getElementById('click-to-view');
+      <!-- Section 2: Discord Members -->
+      <div class="section">
+        <h2>Discord Members</h2>
+        <p>We provide <strong>free</strong> and <strong>paid Discord members</strong>. You can get up to 50 members for free, or pay for more if you want to scale up your server fast!</p>
+      </div>
+
+      <!-- Join Discord Button -->
+      <button id="discord-button" class="neon-btn">Join Discord</button>
+    </div>
+  </div>
+
+  <!-- Audio Player -->
+  <audio id="background-music" loop>
+    <source src="Aitch x AJ Tracey - Rain Feat. Tay Keith (Official Video).mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    // Handle click to view
+    const overlay = document.getElementById('overlay');
     const mainContent = document.getElementById('main-content');
-    const landingImage = document.getElementById('landing-image');
     const backgroundMusic = document.getElementById('background-music');
 
-    // Redirect to Discord
-    function redirectToDiscord() {
-        window.location.href = "https://discord.gg/famenow";
-    }
-
-    // Handle Click Event to Fade Out Landing and Show Main Content
-    clickToView.addEventListener('click', () => {
-        landing.style.filter = 'blur(0px)';
-        clickToView.style.opacity = '0';
-        setTimeout(() => {
-            landing.style.opacity = '0';
-            landing.style.display = 'none';
-            mainContent.style.display = 'flex';
-            backgroundMusic.play();
-        }, 1000);
+    document.getElementById('click-to-view').addEventListener('click', () => {
+      overlay.style.opacity = '0';
+      setTimeout(() => {
+        overlay.style.display = 'none';
+        mainContent.classList.remove('hidden');
+        backgroundMusic.play();
+      }, 1000); // 1-second fade out
     });
 
-    // Hover Effect: Make background image respond to mouse movement
-    landing.addEventListener('mousemove', (e) => {
-        const x = e.clientX / window.innerWidth * 100;
-        const y = e.clientY / window.innerHeight * 100;
-        landingImage.style.transform = `translate(-${x / 20}%, -${y / 20}%) scale(1.05)`;
+    // Join Discord Button
+    document.getElementById('discord-button').addEventListener('click', () => {
+      window.location.href = 'https://discord.gg/famenow';
     });
-</script>
+  </script>
 
 </body>
 </html>
